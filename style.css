@@ -1,0 +1,338 @@
+/* ============================================
+   ANCIENT ARTIFACT MUSEUM - LUXURY STYLES
+   ============================================ */
+
+/* CSS Variables */
+:root {
+  --bg-primary: #F5F1EA;
+  --bg-secondary: #EFE8DE;
+  --bg-dark: #111111;
+  --text-primary: #1D1D1D;
+  --text-muted: #5C5C5C;
+  --accent: #8A7454;
+  --border: rgba(0,0,0,0.08);
+}
+
+/* Base Reset */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: auto;
+}
+
+html.lenis, html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-smooth iframe {
+  pointer-events: none;
+}
+
+/* Aged Paper Texture */
+body {
+  background-color: var(--bg-primary);
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.025'/%3E%3C/svg%3E");
+  cursor: none;
+}
+
+/* Selection */
+::selection {
+  background-color: var(--accent);
+  color: white;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--accent);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-primary);
+}
+
+/* ============================================
+   CUSTOM CURSOR
+   ============================================ */
+.cursor-dot,
+.cursor-outline {
+  position: fixed;
+  top: 0;
+  left: 0;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  z-index: 9999;
+  pointer-events: none;
+}
+
+.cursor-dot {
+  width: 6px;
+  height: 6px;
+  background-color: var(--text-primary);
+  transition: width 0.3s, height 0.3s, background-color 0.3s;
+}
+
+.cursor-outline {
+  width: 40px;
+  height: 40px;
+  border: 1px solid rgba(29, 29, 29, 0.3);
+  transition: width 0.4s, height 0.4s, border-color 0.4s, background-color 0.4s;
+}
+
+body:hover .cursor-outline {
+  opacity: 1;
+}
+
+/* Cursor States */
+.cursor-hover .cursor-dot {
+  width: 12px;
+  height: 12px;
+  background-color: var(--accent);
+}
+
+.cursor-hover .cursor-outline {
+  width: 60px;
+  height: 60px;
+  border-color: var(--accent);
+  background-color: rgba(138, 116, 84, 0.05);
+}
+
+.cursor-click .cursor-dot {
+  width: 8px;
+  height: 8px;
+}
+
+/* Hide custom cursor on touch devices */
+@media (hover: none) and (pointer: coarse) {
+  .cursor-dot,
+  .cursor-outline {
+    display: none !important;
+  }
+  body {
+    cursor: auto;
+  }
+}
+
+/* ============================================
+   NAVIGATION
+   ============================================ */
+#navbar {
+  transition: background-color 0.7s ease, backdrop-filter 0.7s ease, box-shadow 0.7s ease;
+}
+
+#navbar.scrolled {
+  background-color: rgba(245, 241, 234, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 1px 0 rgba(0,0,0,0.05);
+}
+
+#navbar.scrolled .nav-link {
+  color: var(--text-primary);
+}
+
+/* Mobile Menu */
+#mobileMenu.open {
+  transform: translateX(0);
+}
+
+/* ============================================
+   MARBLE TEXTURE
+   ============================================ */
+.marble-texture {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='marble'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.015' numOctaves='5'/%3E%3CfeColorMatrix values='0 0 0 0 0.15 0 0 0 0 0.15 0 0 0 0 0.15 0 0 0 1 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23marble)' opacity='0.4'/%3E%3C/svg%3E");
+  background-size: 300px 300px;
+}
+
+/* ============================================
+   HERO SECTION
+   ============================================ */
+.hero-image {
+  transition: transform 0.7s ease;
+}
+
+.hero-image:hover {
+  transform: translateY(-5px);
+}
+
+/* ============================================
+   FLOATING ANIMATION
+   ============================================ */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-15px);
+  }
+}
+
+.floating-statue {
+  animation: float 6s ease-in-out infinite;
+}
+
+/* ============================================
+   ARTIFACT CARDS
+   ============================================ */
+.artifact-card {
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.6s ease;
+}
+
+.artifact-card:hover {
+  transform: translateY(-8px) rotate(0deg);
+  box-shadow: 0 20px 40px -15px rgba(0,0,0,0.1);
+}
+
+.artifact-card:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+}
+
+/* Card image container hover border */
+.artifact-card > div:first-child::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border: 1px solid transparent;
+  transition: border-color 0.5s ease;
+  pointer-events: none;
+}
+
+.artifact-card:hover > div:first-child::after {
+  border-color: var(--accent);
+}
+
+/* ============================================
+   FEATURE CARDS
+   ============================================ */
+.feature-card {
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.feature-card:hover {
+  transform: translateY(-4px);
+}
+
+.feature-card:hover svg {
+  transform: scale(1.1);
+}
+
+.feature-card svg {
+  transition: transform 0.5s ease;
+}
+
+/* ============================================
+   NEWSLETTER INPUT
+   ============================================ */
+#emailInput:focus + .input-underline {
+  width: 100%;
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+@media (max-width: 1023px) {
+  .cursor-dot,
+  .cursor-outline {
+    display: none;
+  }
+  body {
+    cursor: auto;
+  }
+}
+
+@media (max-width: 767px) {
+  .hero-heading {
+    font-size: clamp(2.5rem, 12vw, 4rem);
+  }
+
+  .preserving-heading,
+  .echoes-heading,
+  .discover-heading,
+  .newsletter-heading {
+    font-size: clamp(2rem, 8vw, 3rem);
+  }
+}
+
+/* ============================================
+   ACCESSIBILITY
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .floating-statue {
+    animation: none;
+  }
+}
+
+/* Focus states */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* Skip to content link */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: var(--text-primary);
+  color: white;
+  padding: 8px 16px;
+  z-index: 100;
+  transition: top 0.3s;
+}
+
+.skip-link:focus {
+  top: 0;
+}
+
+/* ============================================
+   IMAGE LOADING STATES
+   ============================================ */
+img {
+  opacity: 1;
+  transition: opacity 0.5s ease;
+}
+
+img[loading="lazy"] {
+  opacity: 0;
+}
+
+img.loaded,
+img[loading="eager"] {
+  opacity: 1;
+}
